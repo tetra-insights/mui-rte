@@ -28,8 +28,9 @@ export type TDecorator = {
 }
 
 export type TAutocompleteStrategy = {
+    asyncItems?: (search: string) => Promise<TAutocompleteItem[]>
     triggerChar: string
-    items: TAutocompleteItem[]
+    items?: TAutocompleteItem[]
     insertSpaceAfter?: boolean
     atomicBlockName?: string
 }
@@ -263,6 +264,7 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
     const editorId = props.id || "mui-rte"
     const toolbarPositionRef = useRef<TPosition | undefined>(undefined)
     const editorStateRef = useRef<EditorState | null>(editorState)
+    const [autocompleteItems, setAutocompleteItems] = useState<TAutocompleteItem[]>([])
     const autocompleteRef = useRef<TAutocompleteStrategy | undefined>(undefined)
     const autocompleteSelectionStateRef = useRef<SelectionState | undefined>(undefined)
     const autocompletePositionRef = useRef<TPosition | undefined>(undefined)
@@ -295,7 +297,10 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
         },
         insertAtomicBlockAsync: (name: string, promise: Promise<TAsyncAtomicBlockResponse>, placeholder?: string) => {
             handleInsertAtomicBlockAsync(name, promise, placeholder)
-        }
+        },
+        insertText: (text: string) => {
+            handleInsertText(text)
+        },
     }))
 
     useEffect(() => {
@@ -321,6 +326,8 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
     useEffect(() => {
         if (searchTerm.length < autocompleteMinSearchCharCount) {
             setSelectedIndex(0)
+        } else if (autocompleteRef.current?.asyncItems !== undefined) {
+            autocompleteRef.current?.asyncItems(searchTerm).then((items: TAutocompleteItem[]) => setAutocompleteItems(items));
         }
     }, [searchTerm])
 
@@ -473,9 +480,13 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
         if (searchTerm.length < autocompleteMinSearchCharCount) {
             return []
         }
-        return autocompleteRef.current!.items
-            .filter(item => (item.keys.filter(key => key.includes(searchTerm)).length > 0))
-            .splice(0, autocompleteLimit)
+        if (autocompleteRef.current?.items !== undefined) {
+            return autocompleteRef.current!.items
+                .filter(item => (item.keys.filter(key => key.includes(searchTerm)).length > 0))
+                .splice(0, autocompleteLimit)
+        } else {
+            return autocompleteItems;
+        }
     }
 
     const handleChange = (state: EditorState) => {
@@ -562,6 +573,20 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
             props.onSave(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
         }
     }
+
+    const handleInsertText = (text: string) => {
+        const currentContent = editorStateRef.current!.getCurrentContent()
+        const currentSelection = editorStateRef.current!.getSelection();
+
+        const newContent = Modifier.replaceText(
+            currentContent,
+            currentSelection,
+            text
+        );
+
+        const newEditorState = EditorState.push(editorState, newContent, 'insert-characters');
+        handleChange(EditorState.forceSelection(newEditorState, newContent.getSelectionAfter()));
+    };
 
     const handleInsertAtomicBlockSync = (name: string, data: any) => {
         const block = atomicBlockExists(name, props.customControls)
