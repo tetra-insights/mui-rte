@@ -87,6 +87,7 @@ export declare type TAutocompleteStrategy = {
     atomicBlockName?: string;
 };
 export declare type TAutocomplete = {
+    minSearchCharCount?: number;
     strategies: TAutocompleteStrategy[];
     suggestLimit?: number;
 };

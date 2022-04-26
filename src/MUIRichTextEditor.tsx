@@ -35,6 +35,7 @@ export type TAutocompleteStrategy = {
 }
 
 export type TAutocomplete = {
+    minSearchCharCount?: number;
     strategies: TAutocompleteStrategy[]
     suggestLimit?: number
 }
@@ -201,7 +202,6 @@ const styleRenderMap: DraftStyleMap = {
 }
 
 const { hasCommandModifier } = KeyBindingUtil
-const autocompleteMinSearchCharCount = 2
 const lineHeight = 26
 const defaultInlineToolbarControls = ["bold", "italic", "underline", "clear"]
 
@@ -267,6 +267,7 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
     const autocompleteSelectionStateRef = useRef<SelectionState | undefined>(undefined)
     const autocompletePositionRef = useRef<TPosition | undefined>(undefined)
     const autocompleteLimit = props.autocomplete ? props.autocomplete.suggestLimit || 5 : 5
+    const autocompleteMinSearchCharCount =  props?.autocomplete?.minSearchCharCount ?? 2;
     const isFirstFocus = useRef(true)
     const customBlockMapRef = useRef<DraftBlockRenderMap | undefined>(undefined)
     const customStyleMapRef = useRef<DraftStyleMap | undefined>(undefined)
