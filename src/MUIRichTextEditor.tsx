@@ -151,7 +151,24 @@ const styles = (theme: Theme & TMUIRichTextEditorStyles) => createStyles({
         margin: theme.spacing(1, 0, 0, 0),
         cursor: "text",
         width: "100%",
-        padding: theme.spacing(0, 0, 1, 0)
+        padding: theme.spacing(0, 0, 1, 0),
+        '& .public-DraftStyleDefault-ltr': {direction: 'ltr', textAlign: 'left'},
+        '& .public-DraftStyleDefault-rtl': {direction :'rtl', textAlign: 'right'},
+        '& .public-DraftStyleDefault-listLTR': {direction: 'ltr'},
+        '& .public-DraftStyleDefault-listRTL': {direction: 'rtl'},
+        '& .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR': {marginLeft: '1.5em'},
+        '& .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR': {marginLeft: '3em'},
+        '& .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR': {marginLeft: '4.5em'},
+        '& .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR': {marginLeft: '6em'},
+        '& .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR': {marginLeft: '7.5em'},
+        '& .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL': {marginRight: '1.5em'},
+        '& .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL': {marginRight: '3em'},
+        '& .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL': {marginRight: '4.5em'},
+        '& .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL': {marginRight: '6em'},
+        '& .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL': {marginRight: '7.5em'},
+        '& .public-DraftStyleDefault-unorderedListItem': {listStyleType: 'square', position: 'relative'},
+        '& .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0': {listStyleType: 'disc'},
+        '& .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1': {listStyleType: 'circle'}
     },
     editorReadOnly: theme?.overrides?.MUIRichTextEditor?.editorReadOnly || {
         borderBottom: "none"
@@ -665,6 +682,11 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
         return "not-handled"
     }
 
+    const onTab = (event: any) => {
+        const maxDepth = 4;
+        handleChange(RichUtils.onTab(event, editorState, maxDepth));
+    };
+
     const handleCustomClick = (style: any, id: string) => {
         if (!props.customControls) {
             return
@@ -1152,6 +1174,7 @@ const MUIRichTextEditor: ForwardRefRenderFunction<TMUIRichTextEditorRef, IMUIRic
                             editorState={editorState}
                             onChange={handleChange}
                             onFocus={handleEditorFocus}
+                            onTab={onTab}
                             readOnly={props.readOnly}
                             handleKeyCommand={handleKeyCommand}
                             handleBeforeInput={handleBeforeInput}
