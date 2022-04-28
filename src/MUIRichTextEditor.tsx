@@ -146,12 +146,7 @@ const styles = (theme: Theme & TMUIRichTextEditorStyles) => createStyles({
     inheritFontSize: theme?.overrides?.MUIRichTextEditor?.inheritFontSize || {
         fontSize: "inherit"
     },
-    editor: theme?.overrides?.MUIRichTextEditor?.editor || {},
-    editorContainer: theme?.overrides?.MUIRichTextEditor?.editorContainer || {
-        margin: theme.spacing(1, 0, 0, 0),
-        cursor: "text",
-        width: "100%",
-        padding: theme.spacing(0, 0, 1, 0),
+    editor: theme?.overrides?.MUIRichTextEditor?.editor || {
         '& .public-DraftStyleDefault-ltr': {direction: 'ltr', textAlign: 'left'},
         '& .public-DraftStyleDefault-rtl': {direction :'rtl', textAlign: 'right'},
         '& .public-DraftStyleDefault-listLTR': {direction: 'ltr'},
@@ -169,6 +164,12 @@ const styles = (theme: Theme & TMUIRichTextEditorStyles) => createStyles({
         '& .public-DraftStyleDefault-unorderedListItem': {listStyleType: 'square', position: 'relative'},
         '& .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0': {listStyleType: 'disc'},
         '& .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1': {listStyleType: 'circle'}
+    },
+    editorContainer: theme?.overrides?.MUIRichTextEditor?.editorContainer || {
+        margin: theme.spacing(1, 0, 0, 0),
+        cursor: "text",
+        width: "100%",
+        padding: theme.spacing(0, 0, 1, 0)
     },
     editorReadOnly: theme?.overrides?.MUIRichTextEditor?.editorReadOnly || {
         borderBottom: "none"
