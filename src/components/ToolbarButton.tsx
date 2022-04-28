@@ -35,15 +35,14 @@ const ToolbarButton: FunctionComponent<IToolbarButtonProps> = (props) => {
     if (props.icon) {
         return (
             <Tooltip title={props.label}>
-
-            <IconButton
-                {...sharedProps}
-                aria-label={props.label}
-                color={props.active ? "primary" : "default"}
-                size={size}
-            >
-                {props.icon}
-            </IconButton>
+                <IconButton
+                    {...sharedProps}
+                    aria-label={props.label}
+                    color={props.active ? "primary" : "default"}
+                    size={size}
+                >
+                    {props.icon}
+                </IconButton>
             </Tooltip>
         )
     }
