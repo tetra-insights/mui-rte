@@ -1,5 +1,5 @@
 {
-  "name": "mui-rte",
+  "name": "@tetra-insights/next-rte",
   "version": "3.0.0",
   "description": "Material-UI Rich Text Editor and Viewer",
   "keywords": [
