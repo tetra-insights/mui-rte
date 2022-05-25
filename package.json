@@ -28,7 +28,7 @@
     "@types/react": "17.0.45",
     "@types/react-dom": "17.0.17",
     "@webpack-cli/serve": "1.6.1",
-    "@babel/core": "7.17.12",
+    "@babel/core": "7.18.2",
     "acorn": "8.7.1",
     "cross-env": "^7.0.3",
     "eslint": "8.14.0",
