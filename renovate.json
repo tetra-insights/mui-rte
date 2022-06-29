@@ -1,33 +1,52 @@
 {
-  "extends": ["config:base"],
-  "separateMajorMinor": true,
-  "stabilityDays": 3,
-  "prHourlyLimit": 5,
-  "prConcurrentLimit": 3,
+  "labels": ["dependencies"],
   "packageRules": [
+    {
+      "matchPackagePatterns": ["mui", "react"],
+      "prPriority": 5
+    },
+    {
+      "matchPackageNames": ["next"],
+      "prPriority": 5
+    },
     {
       "matchPackagePatterns": ["dependencies"],
       "rangeStrategy": "pin"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "prPriority": -1
+    },
+    {
+      "matchDepTypes": ["optionalDependencies"],
+      "addLabels": ["optional"]
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
     }
   ],
-  "automergeType": "pr",
+  "assignAutomerge": "tetrainsights",
   "automergeStrategy": "squash",
-  "separateMinorPatch": true,
-  "patch": {
-    "automerge": true
+  "branchConcurrentLimit": 8,
+  "configMigration": true,
+  "lockFileMaintenance": {"enabled": true},
+  "platformAutomerge": true,
+  "prHourlyLimit": 5,
+  "rollbackPrs": true,
+  "stabilityDays": 2,
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": true,
+    "assignees": [" @tetra-insights/prod-team "]
   },
-  "lockFileMaintenance": {
-    "automerge": true
-  },
-  "assignees": [" @tetra-insights/prod-team "],
-  "labels": ["dependencies"],
-  "ignoreTests": false,
   "ignorePaths": [
-    "**/node_modules/**",
-    "**/examples/**",
+    "**/__fixtures__/**",
     "**/__tests__/**",
+    "**/examples/**",
+    "**/node_modules/**",
     "**/test/**",
-    "**/tests/**",
-    "**/__fixtures__/**"
+    "**/tests/**"
   ]
 }
