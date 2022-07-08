@@ -1,0 +1,52 @@
+{
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["mui", "react"],
+      "prPriority": 5
+    },
+    {
+      "matchPackageNames": ["next"],
+      "prPriority": 5
+    },
+    {
+      "matchPackagePatterns": ["dependencies"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "prPriority": -1
+    },
+    {
+      "matchDepTypes": ["optionalDependencies"],
+      "addLabels": ["optional"]
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    }
+  ],
+  "assignAutomerge": "tetrainsights",
+  "automergeStrategy": "squash",
+  "branchConcurrentLimit": 8,
+  "configMigration": true,
+  "lockFileMaintenance": {"enabled": true},
+  "platformAutomerge": true,
+  "prHourlyLimit": 5,
+  "rollbackPrs": true,
+  "stabilityDays": 2,
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": true,
+    "assignees": [" @tetra-insights/prod-team "]
+  },
+  "ignorePaths": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/examples/**",
+    "**/node_modules/**",
+    "**/test/**",
+    "**/tests/**"
+  ]
+}

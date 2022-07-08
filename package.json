@@ -1,6 +1,6 @@
 {
-  "name": "mui-rte",
-  "version": "2.0.1",
+  "name": "@tetra-insights/next-rte",
+  "version": "3.0.0",
   "description": "Material-UI Rich Text Editor and Viewer",
   "keywords": [
     "material-ui",
@@ -11,14 +11,6 @@
     "text editor",
     "draft-js"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/niuware/mui-rte.git"
-  },
-  "bugs": {
-    "url": "https://github.com/niuware/mui-rte/issues"
-  },
-  "homepage": "https://github.com/niuware/mui-rte#readme",
   "main": "index.js",
   "scripts": {
     "serve": "cross-env webpack-dev-server --mode development",
@@ -28,27 +20,27 @@
   "author": "Erik Lopez",
   "license": "MIT",
   "devDependencies": {
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.0",
-    "@mui/material": "^5.0.0",
-    "@mui/styles": "^5.0.0",
-    "@types/react": "^17.0.22",
-    "@types/react-dom": "^17.0.9",
-    "@webpack-cli/serve": "^1.5.2",
-    "@babel/core": "^7.15.5",
-    "acorn": "^8.5.0",
+    "@emotion/react": "11.9.3",
+    "@emotion/styled": "11.9.3",
+    "@mui/icons-material": "5.8.3",
+    "@mui/material": "5.8.3",
+    "@mui/styles": "5.8.3",
+    "@types/react": "17.0.45",
+    "@types/react-dom": "17.0.17",
+    "@webpack-cli/serve": "1.6.1",
+    "@babel/core": "7.18.2",
+    "acorn": "8.7.1",
     "cross-env": "^7.0.3",
-    "eslint": "^7.32.0",
+    "eslint": "8.17.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "typescript": "^4.4.3",
-    "ts-loader": "^9.2.6",
-    "webpack": "^5.53.0",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1",
-    "bufferutil": "^4.0.3",
-    "utf-8-validate": "^5.0.5"
+    "typescript": "4.7.3",
+    "ts-loader": "9.3.0",
+    "webpack": "5.73.0",
+    "webpack-cli": "4.9.2",
+    "webpack-dev-server": "4.9.2",
+    "bufferutil": "4.0.6",
+    "utf-8-validate": "5.0.9"
   },
   "peerDependencies": {
     "@mui/material": "^5.0.0",
@@ -61,12 +53,24 @@
     "@types/draft-js": "^0.11.5",
     "classnames": "^2.3.1",
     "draft-js": "^0.11.7",
-    "immutable": "^3.8.2"
+    "immutable": "^4.0.0"
   },
   "files": [
     "dist",
     "index.js",
     "index.d.ts"
   ],
-  "types": "index.d.ts"
+  "types": "index.d.ts",
+  "homepage": "https://github.com/tetra-insights/mui-rte#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetra-insights/mui-rte.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tetra-insights/mui-rte/issues"
+  },
+  "author": {
+    "name": "Tetra Insights",
+    "url": "https://www.tetrainsights.com"
+  }
 }
