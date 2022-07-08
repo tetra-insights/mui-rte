@@ -1,0 +1,5 @@
+releaseType: node
+packageName: "@tetra-insights/next-rte"
+handleGHRelease: true
+primaryBranch: master
+changelogType: github
