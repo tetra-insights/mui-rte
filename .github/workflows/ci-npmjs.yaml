@@ -1,8 +1,8 @@
 name: Publish Package to npmjs
-# on:
-#   release:
-#     types: [created]
-on: [push]
+on:
+  release:
+    types: [published]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,8 +13,7 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm version ${{ github.event.release.tag_name }}
+      - run: yarn install --frozen-lockfile
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_AUTOMATION_TOKEN }}
